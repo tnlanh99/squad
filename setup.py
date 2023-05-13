@@ -95,9 +95,7 @@ def process_file(filename, data_type, word_counter, char_counter):
     total = 0
     with open(filename, "r") as fh:
         source = json.load(fh)
-        source = source["data"]
-        source = source[:(len(source) // 2)]
-        for article in tqdm(source):
+        for article in tqdm(source["data"]):
             for para in article["paragraphs"]:
                 context = para["context"].replace(
                     "''", '" ').replace("``", '" ')
