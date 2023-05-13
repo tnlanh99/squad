@@ -16,19 +16,17 @@ def split_data(data, n_part):
 
 
 if __name__ == "__main__":
-    n_part = 2
+    n_part = 5
     data = np.load("./data/train.npz")
     splited_data = [{} for _ in range(n_part)]
 
     for file in data.files:
-        print(f"=========== Processing {file} {data[file].shape} ===========")
+        print(f"Processing {file} {data[file].shape}...")
         parts = split_data(data[file], n_part)
         for i in range(len(parts)):
             splited_data[i][file] = parts[i]
 
-    os.makedirs("./splited_data", exist_ok=True)
-
     for i in range(n_part):
-        np.savez(f"./splited_data/train_{i}.npz", **splited_data[i])
+        np.savez(f"./data/train_part_{i}.npz", **splited_data[i])
         
     print("Done!")
